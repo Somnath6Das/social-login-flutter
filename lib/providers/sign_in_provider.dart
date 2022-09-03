@@ -131,6 +131,7 @@ class SignInProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+  // save data to shared_preferences
   Future saveDataToSharedPreferences() async {
     final SharedPreferences s = await SharedPreferences.getInstance();
     await s.setString('name', _name!);
@@ -139,6 +140,18 @@ class SignInProvider extends ChangeNotifier {
     await s.setString('uid', _uid!);
     await s.setString('provider', _provider!);
     notifyListeners();
+  }
+
+  //show shared_preferences data to home screen
+  Future getDataFromSharedPreferences() async {
+    final SharedPreferences s = await SharedPreferences.getInstance();
+    _name = s.getString('name');
+    _email = s.getString('email');
+    _imageUrl = s.getString('image_url');
+    _uid = s.getString('uid');
+    _provider = s.getString('provider');
+    notifyListeners();
+
   }
 
   // check user exist or not

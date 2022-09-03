@@ -220,7 +220,12 @@ class _LoginScreenState extends State<LoginScreen> {
           sp.checkUserExists().then((value) async {
             if (value == true) {
               //user exist
-
+              await sp.getUserDataFromFirestore(sp.uid).then((value) => sp
+                  .saveDataToSharedPreferences()
+                  .then((value) => sp.setSignIn().then((value) {
+                        googleController.success();
+                        handleAfterSignIn();
+                      })));
             } else {
               //user does not exist
               sp.saveDataToFirestore().then((value) => sp
