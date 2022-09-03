@@ -72,7 +72,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   width: 5,
                 ),
                 Text("${sp.provider}".toUpperCase(),
-                    style: const TextStyle(color: Colors.red)),
+                    style: const TextStyle(color: Colors.red, fontWeight: FontWeight.bold)),
               ],
             ),
             const SizedBox(
