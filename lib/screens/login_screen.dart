@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:multiple_login/providers/sign_in_provider.dart';
+import 'package:multiple_login/screens/home_screen.dart';
 import 'package:multiple_login/utils/config.dart';
 import 'package:provider/provider.dart';
 import 'package:rounded_loading_button/rounded_loading_button.dart';
-
 import '../providers/internet_provider.dart';
-import '../utils/next_sereen.dart';
+import '../utils/next_screen.dart';
 import '../utils/snack_bar.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -72,7 +73,9 @@ class _LoginScreenState extends State<LoginScreen> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 RoundedLoadingButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    handleGoogleSignIn();
+                  },
                   controller: googleController,
                   successColor: Colors.red,
                   width: MediaQuery.of(context).size.width * 0.80,
@@ -197,5 +200,45 @@ class _LoginScreenState extends State<LoginScreen> {
         ),
       )),
     );
+  }
+
+  Future handleGoogleSignIn() async {
+    final sp = context.read<SignInProvider>();
+    final ip = context.read<InternetProvider>();
+    await ip.checkInternetConnection();
+
+    if (ip.hasInternet == false) {
+      openSnackbar(context, "Check your internet connection", Colors.red);
+      googleController.reset();
+    } else {
+      await sp.signInWithGoogle().then((value) {
+        if (sp.hasError == true) {
+          openSnackbar(context, sp.errorCode.toString(), Colors.red);
+          googleController.reset();
+        } else {
+          // check whether user is sign in or not
+          sp.checkUserExists().then((value) async {
+            if (value == true) {
+              //user exist
+
+            } else {
+              //user does not exist
+              sp.saveDataToFirestore().then((value) => sp
+                  .saveDataToSharedPreferences()
+                  .then((value) => sp.setSignIn().then((value) {
+                        googleController.success();
+                        handleAfterSignIn();
+                      })));
+            }
+          });
+        }
+      });
+    }
+  }
+
+  handleAfterSignIn() {
+    Future.delayed(const Duration(milliseconds: 1000)).then((value) {
+      nextScreenReplace(context, const HomeScreen());
+    });
   }
 }
