@@ -1,0 +1,16 @@
+
+
+
+1. in project/android folder
+  ./gradlew signingReport
+
+
+// for generating sha code run command in // project > android folder ->   ./gradlew signingReport
+// paste sha code and generate hash code in this site -> http://tomeko.net/online_tools/hex_to_base64.php
+// some changes made for facebookLogin in    ->      android\app\src\main\AndroidManifest.xml
+//need to create    ->   android\app\src\main\res\values\strings.xml 
+
+
+
+# For creating the keystore file i.e., debug.keystore 
+keytool -genkey -v -keystore debug.keystore -alias androiddebugkey -storepass android -keypass android -keyalg RSA -keysize 2048 -validity 10000
