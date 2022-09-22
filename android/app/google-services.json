@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "609127715319",
+    "project_id": "multiple-login-52880",
+    "storage_bucket": "multiple-login-52880.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:609127715319:android:838889ed56ef4301151ef2",
+        "android_client_info": {
+          "package_name": "com.helloworldon9.multiple_login"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "609127715319-i8j595g1uk51hig92c1c655fepmh49t1.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.helloworldon9.multiple_login",
+            "certificate_hash": "2f9aa1b93a81f390b0178b7801fb81ade6d48dfc"
+          }
+        },
+        {
+          "client_id": "609127715319-4n8nn193knqrik4c5iglf7taca99o1do.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBQkcZRWOdFPBOWo6zpcUPhBOg8Acb-N7A"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "609127715319-4n8nn193knqrik4c5iglf7taca99o1do.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
